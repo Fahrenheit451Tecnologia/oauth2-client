@@ -51,6 +51,12 @@ class AccessToken implements JsonSerializable
     protected $values = [];
 
     /**
+     * @var array
+     */
+    protected $tokenClaims = [];
+
+
+    /**
      * Constructs an access token.
      *
      * @param array $options An array of options returned by the service provider
@@ -104,6 +110,16 @@ class AccessToken implements JsonSerializable
             'expires_in',
             'expires',
         ]));
+
+        $this->tokenClaims = array_diff_key($options, array_flip([
+            'access_token',
+            'resource_owner_id',
+            'refresh_token',
+            'expires_in',
+            'expires',
+            'values',
+        ]));
+
     }
 
     /**
@@ -224,5 +240,13 @@ class AccessToken implements JsonSerializable
         }
 
         return $parameters;
+    }
+
+    /**
+     * Returns an array of Token Claims
+     * @return array
+     */
+    public function getTokenClaims(){
+        return $this->tokenClaims;
     }
 }
