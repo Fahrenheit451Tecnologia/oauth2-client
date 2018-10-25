@@ -53,7 +53,8 @@ class AccessToken implements JsonSerializable
     /**
      * @var array
      */
-    protected $tokenClaims = [];
+
+    protected $idTokenClaims = [];
 
 
     /**
@@ -111,7 +112,7 @@ class AccessToken implements JsonSerializable
             'expires',
         ]));
 
-        $this->tokenClaims = array_diff_key($options, array_flip([
+        $this->idTokenClaims = array_diff_key($options, array_flip([
             'access_token',
             'resource_owner_id',
             'refresh_token',
@@ -247,6 +248,6 @@ class AccessToken implements JsonSerializable
      * @return array
      */
     public function getTokenClaims(){
-        return $this->tokenClaims;
+        return $this->idTokenClaims;
     }
 }
